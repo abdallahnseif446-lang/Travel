@@ -1,0 +1,238 @@
+﻿@page
+@model AddBookingModel
+
+@{
+    ViewData["Title"] = "Manage Bookings";
+    Layout = "_AdminLayout";
+}
+
+<style>
+
+    .header {
+        background: linear-gradient(135deg,#0d6efd,#084298);
+        color: white;
+        padding: 40px;
+        border-radius: 25px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: 20px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    }
+
+    .stat-number {
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    .booking-card {
+        background: white;
+        border-radius: 20px;
+        padding: 20px;
+        margin-top: 20px;
+        box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    }
+
+    .badge {
+        padding: 6px 10px;
+        border-radius: 10px;
+        font-size: 12px;
+    }
+
+    /* ================= MOBILE ================= */
+    @@media (max-width: 768px) {
+
+        .header h1 {
+            font-size: 22px;
+        }
+
+        .stat-card {
+            margin-bottom: 10px;
+        }
+
+        table {
+            min-width: 600px;
+            font-size: 13px;
+        }
+    }
+
+</style>
+
+<div class="container py-4">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>🎟️ Booking Management</h1>
+        <p>Manage flight reservations easily</p>
+    </div>
+
+    <!-- STATS -->
+    <div class="row g-3">
+
+        <div class="col-md-4">
+            <div class="stat-card">
+                <h5>Total Bookings</h5>
+                <div class="stat-number">@Model.b?.Count</div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="stat-card">
+                <h5>Confirmed</h5>
+                <div class="stat-number text-success">@Model.conf</div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="stat-card">
+                <h5>Cancelled</h5>
+                <div class="stat-number text-danger">@Model.can</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- DESKTOP TABLE -->
+    <div class="booking-card d-none d-md-block">
+
+        <h4 class="mb-3">Recent Bookings</h4>
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle">
+
+                <thead>
+                    <tr>
+                        <th>Passenger</th>
+                        <th>Route</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var booking in Model.b)
+                    {
+                        <tr>
+
+                            <td>@(booking.Passenger?.FullName ?? "N/A")</td>
+
+                            <td>
+                                @(booking.Flight != null
+                                    ? booking.Flight.FromCity + " → " + booking.Flight.ToCity
+                                    : "N/A")
+                            </td>
+
+                            <td>
+                                @(booking.Flight != null
+                                    ? booking.Flight.DepartureTime.ToString("dd/MM/yyyy")
+                                    : "-")
+                            </td>
+
+                            <td>
+                                @switch (booking.Status)
+                                {
+                                    case "Confirmed":
+                                        <span class="badge bg-success">Confirmed</span>
+                                        break;
+
+                                    case "Cancelled":
+                                        <span class="badge bg-danger">Cancelled</span>
+                                        break;
+
+                                    default:
+                                        <span class="badge bg-warning text-dark">Pending</span>
+                                        break;
+                                }
+                            </td>
+
+                            <td>
+
+                                @if (booking.Status == "Pending")
+                                {
+                                    <form method="post"
+                                          asp-page-handler="Confirm"
+                                          asp-route-id="@booking.Id"
+                                          style="display:inline;">
+                                        <button class="btn btn-success btn-sm">Confirm</button>
+                                    </form>
+
+                                    <form method="post"
+                                          asp-page-handler="Cancel"
+                                          asp-route-id="@booking.Id"
+                                          style="display:inline;">
+                                        <button class="btn btn-danger btn-sm">Cancel</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Done</span>
+                                }
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+    <!-- MOBILE CARDS -->
+    <div class="d-md-none">
+
+        @foreach (var booking in Model.b)
+        {
+            <div class="booking-card">
+
+                <h6 class="fw-bold">
+                    @(booking.Passenger?.FullName ?? "N/A")
+                </h6>
+
+                <p>
+                    @(booking.Flight != null
+                        ? booking.Flight.FromCity + " → " + booking.Flight.ToCity
+                        : "N/A")
+                </p>
+
+                <p>
+                    @(booking.Flight != null
+                        ? booking.Flight.DepartureTime.ToString("dd MMM yyyy")
+                        : "-")
+                </p>
+
+                <div>
+
+                    @switch (booking.Status)
+                    {
+                        case "Confirmed":
+                            <span class="badge bg-success">Confirmed</span>
+                            break;
+
+                        case "Cancelled":
+                            <span class="badge bg-danger">Cancelled</span>
+                            break;
+
+                        default:
+                            <span class="badge bg-warning text-dark">Pending</span>
+                            break;
+                    }
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>

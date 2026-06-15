@@ -1,0 +1,297 @@
+﻿@page "{y:int?}"
+@model IndexModel
+@{
+    ViewData["Title"] = "NassiFly";
+}
+
+<div class="hero">
+    <div class="hero-content">
+
+        <form method="post">
+
+            <h1>NassiFly ✈️</h1>
+
+            <p>Book your next flight and discover the world</p>
+
+            <div class="search-card">
+
+                <div class="row g-3">
+
+                    <div class="col-12 col-md-3">
+                        <input asp-for="f.FromCity" class="form-control" placeholder="From" />
+                        <span style="color:darkred" asp-validation-for="f.FromCity"></span>
+                    </div>
+
+                    <div class="col-12 col-md-3">
+                        <input asp-for="f.ToCity" class="form-control" placeholder="To" />
+                    </div>
+
+                    <div class="col-12 col-md-3">
+                        <input asp-for="f.DepartureTime" type="date" class="form-control" />
+                        <span style="color:darkred" asp-validation-for="f.DepartureTime"></span>
+                    </div>
+
+                    <div class="col-12 col-md-3">
+                        <button type="submit" class="btn btn-primary w-100">
+                            Search ✈️
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+</div>
+     
+
+<section class="container py-5">
+
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Popular Destinations</h2>
+        <p class="text-muted">
+            Travel to the most visited destinations
+        </p>
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="destination-card">
+                <div class="overlay-text">
+                    <h3>🇱🇧 Lebanon</h3>
+                    <p>Beirut • Byblos • Faraya</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="destination-card">
+                <div class="overlay-text">
+                    <h3>🇪🇸 Spain</h3>
+                    <p>Madrid • Barcelona</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="destination-card">
+                <div class="overlay-text">
+                    <h3>🇸🇦 Saudi Arabia</h3>
+                    <p>Riyadh • Jeddah</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+            <div class="destination-card">
+                <div class="overlay-text">
+                    <h3>🇮🇹 Italy</h3>
+                    <p>Rome • Milan • Venice</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+            <div class="destination-card">
+                <div class="overlay-text">
+                    <h3>🇬🇧 England</h3>
+                    <p>London • Manchester</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="container py-5">
+
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Why Choose NassiFly?</h2>
+    </div>
+
+    <div class="row">
+
+        <div class="col-12 col-md-4 text-center mb-4">
+            <h1>⚡</h1>
+            <h4>Fast Booking</h4>
+            <p>Reserve your flight in seconds.</p>
+        </div>
+
+        <div class="col-12 col-md-4 text-center mb-4">
+            <h1>💰</h1>
+            <h4>Best Prices</h4>
+            <p>Affordable airline tickets.</p>
+        </div>
+
+        <div class="col-12 col-md-4 text-center mb-4">
+            <h1>🔒</h1>
+            <h4>Secure Payment</h4>
+            <p>Safe and trusted transactions.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<footer class="footer text-center">
+    © 2026 NassiFly ✈️
+</footer>
+
+<style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    .text-danger {
+        color: black !important;
+        font-weight: bold;
+    }
+
+    .hero {
+        min-height: 100vh;
+        padding: 40px 15px;
+        background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero-content {
+        color: white;
+        width: 100%;
+    }
+
+        .hero-content h1 {
+            font-size: 80px;
+            font-weight: bold;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+        }
+
+    .search-card {
+        background: rgba(255,255,255,.15);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        padding: 25px;
+        border-radius: 20px;
+        margin-top: 30px;
+        width: 100%;
+        max-width: 1100px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .destination-card {
+        height: 300px;
+        border-radius: 20px;
+        background: linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,.8)), url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: flex-end;
+        transition: .4s;
+        overflow: hidden;
+    }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+        }
+
+    .overlay-text {
+        color: white;
+        padding: 20px;
+    }
+
+    .footer {
+        background: black;
+        color: white;
+        padding: 25px;
+    }
+
+    .form-control {
+        height: 50px;
+    }
+
+    .btn-primary {
+        height: 50px;
+    }
+
+    /* Tablets & Phones */
+    @@media (max-width: 768px) {
+
+        .hero {
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 42px;
+        }
+
+        .hero-content p {
+            font-size: 16px;
+        }
+
+        .search-card {
+            width: 95%;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .destination-card {
+            height: 220px;
+        }
+
+        .overlay-text h3 {
+            font-size: 22px;
+        }
+
+        .overlay-text p {
+            font-size: 14px;
+        }
+
+        .footer {
+            font-size: 14px;
+        }
+
+        .form-control,
+        .btn-primary {
+            height: 48px;
+        }
+    }
+
+    /* Small Phones */
+    @@media (max-width: 480px) {
+
+        .hero-content h1 {
+            font-size: 34px;
+        }
+
+        .hero-content p {
+            font-size: 14px;
+        }
+
+        .search-card {
+            padding: 15px;
+        }
+
+        .destination-card {
+            height: 200px;
+        }
+
+        .overlay-text {
+            padding: 15px;
+        }
+    }
+</style>

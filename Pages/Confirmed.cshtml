@@ -1,0 +1,181 @@
+﻿@page "{id:int}"
+@model ConfirmedModel
+
+@{
+    ViewData["Title"] = "Booking Confirmed";
+}
+
+<style>
+
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg,#0d6efd,#084298) !important;
+    }
+
+    body {
+        background: transparent !important;
+        overflow-x: hidden;
+    }
+
+    .page-wrapper {
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .success-card {
+        background: white;
+        width: 700px;
+        max-width: 100%;
+        border-radius: 25px;
+        padding: 40px;
+        text-align: center;
+        box-shadow: 0 15px 40px rgba(0,0,0,.2);
+    }
+
+    .success-icon {
+        font-size: 70px;
+        margin-bottom: 10px;
+    }
+
+    .ticket-box {
+        background: #f8f9fa;
+        border-radius: 18px;
+        padding: 20px;
+        margin-top: 25px;
+        text-align: left;
+    }
+
+        .ticket-box h4 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+    .ticket-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-size: 15px;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+        .ticket-row strong {
+            color: #333;
+        }
+
+    .btn-home {
+        background: #0d6efd;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 12px 28px;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 25px;
+        font-weight: bold;
+        transition: .3s;
+    }
+
+        .btn-home:hover {
+            background: #084298;
+            color: white;
+        }
+
+    /* 📱 Mobile */
+    @@media (max-width: 768px) {
+
+        .success-card {
+            padding: 25px;
+            border-radius: 18px;
+        }
+
+        .success-icon {
+            font-size: 55px;
+        }
+
+        .ticket-row {
+            font-size: 14px;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .btn-home {
+            width: 100%;
+        }
+    }
+
+</style>
+
+<div class="page-wrapper">
+
+    <div class="success-card">
+
+        <div class="success-icon">✅</div>
+
+        <h1 class="text-success fw-bold">
+            Booking Confirmed!
+        </h1>
+
+        <p class="lead">
+            Thank you for choosing NassiFly ✈️
+        </p>
+
+        <p class="text-muted">
+            Your ticket has been booked successfully.
+        </p>
+
+        <div class="ticket-box">
+
+            <h4 class="mb-4">Flight Ticket Details</h4>
+
+            <div class="ticket-row">
+                <strong>Passenger</strong>
+                <span>@Model.name</span>
+            </div>
+
+            <div class="ticket-row">
+                <strong>Route</strong>
+                <span>@Model.f.FromCity → @Model.f.ToCity</span>
+            </div>
+
+            <div class="ticket-row">
+                <strong>Departure</strong>
+                <span>
+                    @Model.f.DepartureTime.ToString("dddd, dd MMMM yyyy") -
+                    @Model.f.DepartureTime.ToString("hh:mm tt")
+                </span>
+            </div>
+
+            <div class="ticket-row">
+                <strong>Arrival</strong>
+                <span>
+                    @Model.f.ArrivalTime.ToString("dddd, dd MMMM yyyy") -
+                    @Model.f.ArrivalTime.ToString("hh:mm tt")
+                </span>
+            </div>
+
+            <div class="ticket-row">
+                <strong>Seat Number</strong>
+                <span>@Model.s</span>
+            </div>
+
+            <div class="ticket-row">
+                <strong>Total Paid</strong>
+                <span>@Model.price$</span>
+            </div>
+
+        </div>
+
+        <a href="/Index" class="btn-home">
+            Back To Home
+        </a>
+
+    </div>
+
+</div>

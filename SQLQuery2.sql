@@ -1,0 +1,2 @@
+﻿SELECT * FROM Passers
+DELETE FROM Passers WHERE Id=;

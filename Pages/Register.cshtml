@@ -1,0 +1,256 @@
+﻿@page
+@model Travel.Pages.RegisterModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<style>
+
+    html, body {
+        margin: 0;
+        padding: 0;
+        min-height: 100%;
+    }
+
+    body {
+        background-image: url('https://images.unsplash.com/photo-1542296332-2e4473faf563?q=80&w=2070&auto=format&fit=crop');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+    }
+
+    .overlay {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .register-card {
+        width: 100%;
+        max-width: 650px;
+        background: rgba(10,88,202,0.35);
+        backdrop-filter: blur(15px);
+        border-radius: 25px;
+        padding: 35px;
+        box-shadow: 0 8px 32px rgba(0,0,0,.4);
+        color: white;
+    }
+
+    .logo {
+        font-size: 50px;
+        margin-bottom: 10px;
+    }
+
+    .form-control {
+        background: rgba(255,255,255,0.15);
+        border: none;
+        color: white;
+        padding: 12px;
+    }
+
+        .form-control::placeholder {
+            color: #ddd;
+        }
+
+        .form-control:focus {
+            background: rgba(255,255,255,0.20);
+            color: white;
+            box-shadow: none;
+        }
+
+    .form-label {
+        font-weight: 500;
+        margin-bottom: 6px;
+        color: white;
+    }
+
+    .btn-register {
+        background: black;
+        color: white;
+        border: none;
+        padding: 12px;
+        font-weight: bold;
+        border-radius: 10px;
+        transition: .3s;
+    }
+
+        .btn-register:hover {
+            background: #0d6efd;
+        }
+
+    .divider {
+        text-align: center;
+        margin: 20px 0;
+        color: #ddd;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    .text-danger {
+        color: #ffb3b3 !important;
+        font-size: 13px;
+    }
+
+    /* 📱 Mobile */
+    @@media (max-width: 768px) {
+
+        .register-card {
+            padding: 25px;
+            border-radius: 18px;
+        }
+
+        .logo {
+            font-size: 40px;
+        }
+
+        .register-card h1 {
+            font-size: 28px;
+        }
+
+        .register-card p {
+            font-size: 14px;
+        }
+    }
+
+    @@media (max-width: 480px) {
+
+        .register-card {
+            padding: 20px;
+        }
+
+        .form-control {
+            padding: 10px;
+        }
+
+        .btn-register {
+            padding: 10px;
+        }
+    }
+
+</style>
+
+<div class="overlay">
+
+    <div class="register-card">
+
+        <div class="text-center mb-4">
+
+            <div class="logo">✈️</div>
+
+            <h1 class="fw-bold">NassiFly</h1>
+
+            <p>Create your account and start exploring the world</p>
+
+        </div>
+
+        <form method="post">
+
+            
+
+            <div class="mb-3">
+
+                <label class="form-label">Full Name</label>
+
+                <input asp-for="b.FullName"
+                       class="form-control"
+                       placeholder="Enter your full name" />
+
+                <span asp-validation-for="b.FullName"
+                      class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">Email Address</label>
+
+                <input asp-for="b.EmailAddress"
+                       class="form-control"
+                       placeholder="example@email.com" />
+
+                <span asp-validation-for="b.EmailAddress"
+                      class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">Passport Number</label>
+
+                <input asp-for="b.PassportNumber"
+                       class="form-control"
+                       placeholder="Passport Number" />
+
+                <span asp-validation-for="b.PassportNumber"
+                      class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">Password</label>
+
+                <input asp-for="b.Password"
+                       type="password"
+                       class="form-control"
+                       placeholder="Enter password" />
+
+                <span asp-validation-for="b.Password"
+                      class="text-danger"></span>
+
+            </div>
+
+            <div class="form-check mb-4">
+
+                <input class="form-check-input"
+                       type="checkbox"
+                       required />
+
+                <label class="form-check-label">
+                    I agree to the Terms & Conditions
+                </label>
+
+            </div>
+
+            <button type="submit"
+                    class="btn btn-register w-100">
+
+                Create Account
+
+            </button>
+
+        </form>
+
+        <div class="divider">
+            ───── OR ─────
+        </div>
+
+        <div class="text-center">
+
+            <p>Already have an account?</p>
+
+            <a href="/Login" class="fw-bold">
+                Sign In
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - NassiFly Admin</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Travel.styles.css" asp-append-version="true" />
+
+    <style>
+
+            body {
+                margin: 0;
+                background: #f4f7fc;
+                font-family: Arial, sans-serif;
+            }
+
+            /* SIDEBAR */
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 260px;
+                height: 100vh;
+                background: #0d6efd;
+                color: white;
+                padding: 20px;
+                overflow-y: auto;
+                transition: 0.3s;
+            }
+
+                .sidebar h2 {
+                    font-weight: bold;
+                    margin-bottom: 30px;
+                    font-size: 22px;
+                }
+
+                .sidebar a {
+                    display: block;
+                    color: white;
+                    text-decoration: none;
+                    padding: 12px;
+                    border-radius: 10px;
+                    margin-bottom: 8px;
+                    transition: 0.3s;
+                }
+
+                    .sidebar a:hover {
+                        background: rgba(255,255,255,0.15);
+                    }
+
+            /* MAIN */
+            .main-content {
+                margin-left: 260px;
+                padding: 25px;
+                min-height: 100vh;
+            }
+
+            /* MOBILE FIX */
+            @@media (max-width: 768px) {
+
+                .sidebar {
+                    position: relative;
+                    width: 100%;
+                    height: auto;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    text-align: center;
+                }
+
+                    .sidebar h2 {
+                        width: 100%;
+                        margin-bottom: 15px;
+                    }
+
+                    .sidebar a {
+                        display: inline-block;
+                        margin: 5px;
+                        padding: 10px 14px;
+                        font-size: 14px;
+                    }
+
+                .main-content {
+                    margin-left: 0;
+                    padding: 15px;
+                }
+            }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+        <h2>✈️ NassiFly Admin</h2>
+
+        <a asp-page="/Admin">📊 Dashboard</a>
+        <a asp-page="/AddFlights">✈️ Flights</a>
+        <a asp-page="/AddBooking">🎟️ Bookings</a>
+        <a asp-page="/ViewPassangers">👥 Passengers</a>
+
+    </div>
+
+    <!-- MAIN -->
+    <div class="main-content">
+        @RenderBody()
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

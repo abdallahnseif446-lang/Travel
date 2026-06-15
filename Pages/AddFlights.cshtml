@@ -1,0 +1,171 @@
+﻿@page
+@model AddFlightsModel
+
+@{
+    ViewData["Title"] = "Add Flight";
+    Layout = "_AdminLayout";
+}
+
+<style>
+
+    body {
+        background: #f4f7fc;
+    }
+
+    .add-flight-container {
+        max-width: 900px;
+        margin: 50px auto;
+        padding: 0 15px;
+    }
+
+    .header-card {
+        background: linear-gradient(135deg,#0d6efd,#084298);
+        color: white;
+        padding: 40px;
+        border-radius: 25px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .flight-card {
+        background: white;
+        border-radius: 25px;
+        padding: 35px;
+        box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+
+    .form-control {
+        height: 50px;
+        border-radius: 12px;
+    }
+
+    .btn-add {
+        background: #198754;
+        border: none;
+        border-radius: 12px;
+        padding: 14px;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        transition: .3s;
+    }
+
+        .btn-add:hover {
+            background: #157347;
+        }
+
+    /* ================= MOBILE ================= */
+    @@media (max-width: 768px) {
+
+        .add-flight-container {
+            margin: 20px 10px;
+        }
+
+        .header-card {
+            padding: 25px;
+            border-radius: 18px;
+        }
+
+            .header-card h1 {
+                font-size: 22px;
+            }
+
+        .flight-card {
+            padding: 20px;
+            border-radius: 18px;
+        }
+
+        .form-control {
+            height: 45px;
+            font-size: 14px;
+        }
+
+        .btn-add {
+            padding: 12px;
+            font-size: 16px;
+        }
+    }
+
+</style>
+
+<div class="add-flight-container">
+
+    <div class="header-card">
+        <h1>✈️ Add New Flight</h1>
+        <p>Create a new flight for passengers</p>
+    </div>
+
+    <div class="flight-card">
+
+        <form method="post">
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label>Departure City</label>
+                    <input asp-for="f.FromCity"
+                           class="form-control"
+                           placeholder="Beirut" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label>Destination City</label>
+                    <input asp-for="f.ToCity"
+                           class="form-control"
+                           placeholder="London" />
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label>Departure Time</label>
+                    <input asp-for="f.DepartureTime"
+                           type="datetime-local"
+                           class="form-control" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label>Arrival Time</label>
+                    <input asp-for="f.ArrivalTime"
+                           type="datetime-local"
+                           class="form-control" />
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4 mb-3">
+                    <label>Ticket Price ($)</label>
+                    <input asp-for="f.Price"
+                           class="form-control"
+                           placeholder="450" />
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label>Total Seats</label>
+                    <input asp-for="f.TotalSeats"
+                           class="form-control"
+                           placeholder="180" />
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label>Available Seats</label>
+                    <input asp-for="f.AvailableSeats"
+                           class="form-control"
+                           placeholder="180" />
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-add w-100 mt-3">
+                ✈️ Add Flight
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

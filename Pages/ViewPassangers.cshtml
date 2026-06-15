@@ -1,0 +1,179 @@
+﻿@page
+@model ViewPassangersModel
+
+@{
+    ViewData["Title"] = "Passengers";
+    Layout = "_AdminLayout";
+}
+
+<style>
+
+    body {
+        background: #f4f7fc;
+    }
+
+    .header {
+        background: linear-gradient(135deg,#0d6efd,#084298);
+        color: white;
+        padding: 40px;
+        border-radius: 25px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: 20px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0,0,0,.08);
+        margin-bottom: 20px;
+    }
+
+    .stat-number {
+        font-size: 32px;
+        font-weight: bold;
+    }
+
+    .table-card {
+        background: white;
+        border-radius: 20px;
+        padding: 25px;
+        margin-top: 30px;
+        box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    }
+
+    .table th {
+        background: #0d6efd;
+        color: white;
+    }
+
+    .profile-circle {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: #0d6efd;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+    }
+
+    /* ================= MOBILE ================= */
+    @@media (max-width: 768px) {
+
+        .header {
+            padding: 25px;
+            border-radius: 18px;
+        }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+        .stat-card {
+            padding: 20px;
+        }
+
+        .table-card {
+            padding: 15px;
+        }
+
+        table {
+            min-width: 600px;
+            font-size: 13px;
+        }
+
+        .profile-circle {
+            width: 35px;
+            height: 35px;
+            font-size: 14px;
+        }
+    }
+
+</style>
+
+<div class="container py-4">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>👥 Passengers Management</h1>
+        <p>View all registered passengers</p>
+    </div>
+
+    <!-- STATS -->
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="stat-card">
+                <h5>Total Passengers</h5>
+                <div class="stat-number">
+                    @(Model.counter)
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-card">
+
+        <h3 class="mb-3">Registered Passengers</h3>
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle">
+
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Passport Number</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var user in (Model.p ))
+                    {
+                        <tr>
+
+                            <td>
+                                <div class="profile-circle">
+                                    @(
+                                        string.IsNullOrEmpty(user.FullName)
+                                        ? "?"
+                                        : user.FullName.Substring(0, 1).ToUpper()
+                                    )
+                                </div>
+                            </td>
+
+                            <td>@user.FullName</td>
+
+                            <td>@user.Email</td>
+
+                            <td>@user.PassportNumber</td>
+
+                            <td>
+                                <form method="post" asp-route-id="@user.Id">
+                                    <button class="btn btn-sm btn-danger">
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

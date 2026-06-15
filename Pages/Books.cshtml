@@ -1,0 +1,342 @@
+﻿@page "{ids:int}"
+@model Travel.Pages.BooksModel
+
+@{
+    ViewData["Title"] = "Book Flight";
+}
+
+<style>
+
+    body {
+        background: #f4f7fc;
+        overflow-x: hidden;
+    }
+
+    .header {
+        background: linear-gradient(135deg,#0d6efd,#0a58ca);
+        color: white;
+        padding: 50px 15px;
+        text-align: center;
+    }
+
+    .booking-card {
+        background: white;
+        border-radius: 20px;
+        padding: 25px;
+        box-shadow: 0 10px 30px rgba(0,0,0,.08);
+        margin-bottom: 20px;
+    }
+
+    .flight-info {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 20px;
+    }
+
+    .seat {
+        width: 45px;
+        height: 45px;
+        border-radius: 10px;
+        border: none;
+        margin: 5px;
+        font-weight: bold;
+        transition: .3s;
+    }
+
+    .seat-available {
+        background: #d1e7dd;
+    }
+
+    .seat-selected {
+        background: #0d6efd;
+        color: white;
+    }
+
+    .seat-occupied {
+        background: #dc3545;
+        color: white;
+        cursor: not-allowed;
+    }
+
+    .seat:hover {
+        transform: scale(1.08);
+    }
+
+    .summary-box {
+        background: #f8f9fa;
+        border-radius: 20px;
+        padding: 20px;
+    }
+
+    .price {
+        font-size: 28px;
+        font-weight: bold;
+        color: #198754;
+    }
+
+    /* 📱 Mobile */
+    @@media (max-width: 768px) {
+
+        .header h1 {`
+            font-size: 26px;
+        }
+
+        .booking-card {
+            padding: 18px;
+        }
+
+        .seat {
+            width: 38px;
+            height: 38px;
+            margin: 3px;
+            font-size: 13px;
+        }
+
+        .summary-box {
+            margin-top: 20px;
+        }
+
+        .price {
+            font-size: 24px;
+        }
+    }
+
+</style>
+
+<div class="header">
+
+    <h1>✈️ Complete Your Booking</h1>
+
+    <p>Select your seat and passenger details</p>
+
+</div>
+<form method="post">
+<div class="container py-5">
+
+    <div class="row">
+
+        <div class="col-lg-8">
+
+            <div class="booking-card mb-4">
+
+                <h3 class="mb-4">
+                    Flight Information
+                </h3>
+
+                <div class="flight-info">
+
+                    <div class="row text-center">
+
+                        <div class="col-md-4">
+                            <h4>@Model.f.FromCity</h4>
+                            <p>@Model.f.DepartureTime.ToString("hh:mm tt")</p>
+                        </div>
+
+                       
+
+                        <div class="col-md-4">
+                            <h4>@Model.f.ToCity</h4>
+                            <p>@Model.f.ArrivalTime.ToString("hh:mm tt")</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            
+            <div class="booking-card mb-4">
+
+                <h3 class="mb-4">
+                    Passenger Information
+                </h3>
+               
+                <div class="row">
+                    
+
+                    <div class="col-md-6 mb-3">
+                        <input class="form-control" required asp-for="FullName"
+                               placeholder="Full Name">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                            <input class="form-control" required asp-for="passnum"
+                               placeholder="Passport Number">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                            <input class="form-control" required asp-for="EmailAdd"
+                               placeholder="Email">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                            <input class="form-control" required asp-for="phone"
+                               placeholder="Phone Number">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="booking-card">
+
+                <h3 class="mb-4">
+                    Choose Your Seat
+                </h3>
+
+                <div class="text-center">
+
+                    <h5 class="mb-4">
+                        Front of Aircraft
+                    </h5>
+
+                    <div>
+
+                        <button type="button" class="seat seat-selected">1A</button>
+                        <button type="button" class="seat seat-available">1B</button>
+
+                        &nbsp;&nbsp;&nbsp;
+
+                        <button type="button" class="seat seat-available">1C</button>
+                        <button type="button" class="seat seat-occupied">1D</button>
+
+                    </div>
+
+                    <div>
+
+                        <button type="button" class="seat seat-available">2A</button>
+                        <button type="button" class="seat seat-available">2B</button>
+
+                        &nbsp;&nbsp;&nbsp;
+
+                        <button type="button" class="seat seat-available">2C</button>
+                        <button type="button" class="seat seat-available">2D</button>
+
+                    </div>
+
+                    <div>
+
+                        <button type="button" class="seat seat-available">3A</button>
+                        <button type="button" class="seat seat-occupied">3B</button>
+
+                        &nbsp;&nbsp;&nbsp;
+
+                        <button type="button" class="seat seat-available">3C</button>
+                        <button type="button" class="seat seat-available">3D</button>
+
+                    </div>
+
+                </div>
+                    <div id="seatError" class="text-danger mb-3"></div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4">
+
+            <div class="summary-box sticky-top">
+
+                <h3>
+                    Booking Summary
+                </h3>
+
+                <hr>
+
+                <p>
+                    Flight:
+                    <strong>@Model.f.FromCity → @Model.f.ToCity</strong>
+                </p>
+
+               
+
+                <p>
+                    Seat:
+                    <strong id="selectedSeat">1A</strong>
+                </p>
+
+                <p>
+                    Passenger:
+                    <strong>1 Adult</strong>
+                </p>
+
+                <hr>
+
+                <div class="price">
+                   @Model.f.Price $
+                </div>
+                
+
+                <button class="btn btn-success w-100 mt-4 py-3">
+
+                    Continue To Payment 💳
+
+                </button>
+                    <input type="hidden" id="SeatInput" name="Seat" required />
+                <input type="hidden" name="Id" value="@Model.f.Id" />
+               
+
+            </div>
+             
+        </div>
+        
+
+    </div>
+    
+
+</div>
+ </form>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const seats = document.querySelectorAll(".seat");
+        const selectedSeat = document.getElementById("selectedSeat");
+        const seatInput = document.getElementById("SeatInput");
+        const seatError = document.getElementById("seatError");
+        const form = document.querySelector("form");
+
+        seats.forEach(function (seat) {
+
+            seat.addEventListener("click", function () {
+
+                if (this.classList.contains("seat-occupied"))
+                    return;
+
+                seats.forEach(function (s) {
+
+                    if (!s.classList.contains("seat-occupied")) {
+                        s.classList.remove("seat-selected");
+                        s.classList.add("seat-available");
+                    }
+
+                });
+
+                this.classList.remove("seat-available");
+                this.classList.add("seat-selected");
+
+                selectedSeat.textContent = this.textContent;
+                seatInput.value = this.textContent;
+
+                seatError.textContent = "";
+            });
+
+        });
+
+        form.addEventListener("submit", function (e) {
+
+            if (seatInput.value.trim() === "") {
+
+                e.preventDefault();
+
+                seatError.textContent = "You must choose a seat first.";
+
+                window.scrollTo({
+                    top: seatError.offsetTop - 100,
+                    behavior: "smooth"
+                });
+            }
+
+        });
+
+    });
+</script>

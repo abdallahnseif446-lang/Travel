@@ -1,0 +1,177 @@
+﻿@page
+@model LoginModel
+@{
+    // Layout = null;
+    ViewData["Title"] = "Login";
+}
+
+<style>
+
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    body {
+        background-image: url('https://images.unsplash.com/photo-1542296332-2e4473faf563?q=80&w=2070&auto=format&fit=crop');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+    }
+
+    .overlay {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .login-card {
+        width: 100%;
+        max-width: 420px;
+        background-color: rgba(10, 88, 202, 0.38) !important;
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 30px;
+        color: white;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+        .login-card label {
+            color: white;
+            font-weight: 500;
+        }
+
+    .form-control {
+        background-color: rgba(255,255,255,0.2);
+        border: none;
+        color: white;
+    }
+
+        .form-control::placeholder {
+            color: #ddd;
+        }
+
+        .form-control:focus {
+            background-color: rgba(255,255,255,0.25);
+            color: white;
+            box-shadow: none;
+        }
+
+    .btn-login {
+        background-color: black;
+        border: none;
+        color: white;
+        transition: 0.3s;
+    }
+
+        .btn-login:hover {
+            background-color: #0b5ed7;
+        }
+
+    a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    /* 📱 Mobile */
+    @@media (max-width: 768px) {
+
+        .login-card {
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+            .login-card h1 {
+                font-size: 28px;
+            }
+
+            .login-card p {
+                font-size: 14px;
+            }
+
+        .btn-login {
+            padding: 10px;
+        }
+    }
+
+</style>
+
+<div class="overlay">
+
+    <div class="login-card">
+
+        <div class="text-center mb-4">
+
+            <h1 class="fw-bold">
+                NassiFly ✈️
+            </h1>
+
+            <p>
+                Login to continue your journey
+            </p>
+
+        </div>
+
+        <form method="post">
+
+            <div class="mb-3">
+
+                <label>Email</label>
+
+                <input type="email"
+                       asp-for="user.EmailAddress"
+                       class="form-control"
+                       placeholder="Enter your email" />
+                
+
+            </div>
+
+            <div class="mb-3">
+
+                <label>Password</label>
+
+                <input type="password"
+                    asp-for="user.Password"
+                       class="form-control"
+                       placeholder="Enter your password" />
+                <span asp-validation-for="user.Password" class="text-danger"></span>
+
+            </div>
+
+            <div class="d-flex justify-content-between mb-3">
+
+
+                <a href="#">
+                    Forgot Password?
+                </a>
+
+            </div>
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <button type="submit"
+                    class="btn btn-login w-100 py-2">
+
+                Login
+            </button>
+
+        </form>
+
+        <div class="text-center mt-4">
+
+            <p>
+                Don’t have an account?
+            </p>
+
+            <a href="/Register" class="fw-bold">
+                Create Account
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

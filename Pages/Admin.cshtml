@@ -1,0 +1,192 @@
+﻿@page "{k:int}"
+@model AdminModel
+@{
+    Layout = "_AdminLayout";
+}
+
+<style>
+
+    body {
+        background: #f4f7fc;
+        overflow-x: hidden;
+    }
+
+    .main {
+        padding: 20px;
+    }
+
+    h1 {
+        font-weight: bold;
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: 18px;
+        padding: 20px;
+        box-shadow: 0 5px 20px rgba(0,0,0,.08);
+        margin-bottom: 15px;
+        transition: .3s;
+    }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .stat-card h6 {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+    .stat-number {
+        font-size: 28px;
+        font-weight: bold;
+        color: #0d6efd;
+    }
+
+    .booking-table {
+        background: white;
+        border-radius: 18px;
+        padding: 20px;
+        margin-top: 25px;
+        box-shadow: 0 5px 20px rgba(0,0,0,.08);
+        overflow-x: auto;
+    }
+
+    table {
+        margin-top: 10px;
+    }
+
+    th {
+        font-size: 14px;
+        color: #555;
+    }
+
+    td {
+        font-size: 14px;
+        vertical-align: middle;
+    }
+
+    .badge {
+        padding: 8px 10px;
+        border-radius: 10px;
+        font-size: 12px;
+    }
+
+    /* 📱 Mobile */
+    @@media (max-width: 768px) {
+
+        .stat-number {
+            font-size: 22px;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        .booking-table {
+            padding: 15px;
+        }
+
+        table {
+            font-size: 13px;
+        }
+    }
+
+</style>
+
+
+
+<div class="main">
+
+    <h1 class="mb-4">
+        Admin Dashboard
+    </h1>
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="stat-card">
+                <h6>Total Bookings</h6>
+                <div class="stat-number">@Model.counter</div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card">
+                <h6>Passengers</h6>
+                <div class="stat-number">@Model.counterp</div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card">
+                <h6>Flights</h6>
+                <div class="stat-number">@Model.counterf</div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card">
+                <h6>Revenue</h6>
+                <div class="stat-number">@Model.prices</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="booking-table">
+
+        <h3>Recent Bookings</h3>
+
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <th>Passenger</th>
+                    <th>Route</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach(var book in Model.b){
+                <tr>
+                    <td>@book.Passenger.FullName</td>
+                    <td>@book.Flight.FromCity → @book.Flight.ToCity</td>
+                        <td>@book.Flight.DepartureTime.ToString("dddd, dd MMMM yyyy")</td>
+                    <td>
+                        @if(@book.Status == "Confirmed"){
+
+                        
+                        <span class="badge bg-success">
+                            Confirmed
+                        </span>
+                        }
+                            @if (@book.Status == "Cancelled")
+                            {
+
+                        
+                                <span class="badge bg-danger">
+                                    Cancelled
+                                </span>
+                            }
+                            @if (@book.Status == "Pending")
+                            {
+
+                        
+                                <span class="badge bg-warning">
+                                    Pending
+                                </span>
+                            }
+                    </td>
+                </tr>
+                }
+                
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
