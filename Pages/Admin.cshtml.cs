@@ -20,9 +20,10 @@ namespace Travel.Pages
         public int counterp { get; set; }
         public int counterf {get; set; }
         public int prices { get; set; }
-        public async Task OnGet(int k)
+        public async Task OnGet()
         {
-            if(k!=2 || k == 0)
+            var k= HttpContext.Session.GetInt32("adminid");
+            if (k is null)
             {
                 RedirectToPage("/Login");
             }

@@ -29,7 +29,8 @@ namespace Travel.Pages
             }
             else if (flag == -5)
             {
-                return RedirectToPage("/Admin",new {k=2 });
+                HttpContext.Session.SetInt32("adminid", 200);
+                return RedirectToPage("/Admin");
             }else if(flag==-100){
                 ModelState.AddModelError("user.Password", "incorrect password");
 

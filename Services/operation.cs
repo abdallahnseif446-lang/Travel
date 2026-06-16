@@ -32,15 +32,12 @@ namespace Travel.Services
                 Flight flight = new Flight()
                 {
                     DepartureTime = f.DepartureTime,
+                    ArrivalTime = f.ArrivalTime,
                     FromCity = f.FromCity,
                     ToCity = f.ToCity,
-                    ArrivalTime = f.ArrivalTime,
                     Price = f.Price,
                     TotalSeats = f.TotalSeats,
-                    AvailableSeats = f.AvailableSeats,
-
-
-
+                    AvailableSeats = f.AvailableSeats
                 };
                 await db.Flights.AddAsync(flight);
                 await db.SaveChangesAsync();

@@ -20,6 +20,14 @@ namespace Travel.Data
                 .WithMany(u => u.Bookings)
                 .HasForeignKey(b => b.PassengerId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Flight>()
+                .Property(f => f.DepartureTime)
+                .HasColumnType("timestamp without time zone");
+
+            modelBuilder.Entity<Flight>()
+                .Property(f => f.ArrivalTime)
+                .HasColumnType("timestamp without time zone");
         }
     }
 

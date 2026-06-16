@@ -27,8 +27,8 @@
                     </div>
 
                     <div class="col-12 col-md-3">
-                        <input asp-for="f.DepartureTime" type="date" class="form-control" />
-                        <span style="color:darkred" asp-validation-for="f.DepartureTime"></span>
+                        <input asp-for="f.DepartureTime" type="date" value="@DateTime.MinValue" class="form-control" />
+                        <span style="color:darkred" asp-validation-for="f.DepartureTime" ></span>
                     </div>
 
                     <div class="col-12 col-md-3">

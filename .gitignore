@@ -1,0 +1,30 @@
+## Build results
+bin/
+obj/
+out/
+publish/
+
+## Visual Studio
+.vs/
+*.user
+*.suo
+
+## Rider / JetBrains
+.idea/
+
+## OS files
+.DS_Store
+Thumbs.db
+
+## Environment
+appsettings.Development.json
+
+## Logs
+*.log
+
+## Dotnet tools
+*.db
+*.sqlite
+
+## Secrets
+secrets.json

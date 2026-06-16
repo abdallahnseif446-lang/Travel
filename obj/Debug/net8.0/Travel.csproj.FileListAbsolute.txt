@@ -105,4 +105,5 @@ C:\Users\USER\source\repos\Travel\Travel\obj\Debug\net8.0\refint\Travel.dll
 C:\Users\USER\source\repos\Travel\Travel\obj\Debug\net8.0\Travel.pdb
 C:\Users\USER\source\repos\Travel\Travel\obj\Debug\net8.0\Travel.genruntimeconfig.cache
 C:\Users\USER\source\repos\Travel\Travel\obj\Debug\net8.0\ref\Travel.dll
+C:\Users\USER\source\repos\Travel\Travel\obj\Debug\net8.0\Travel.sourcelink.json
 C:\Users\USER\source\repos\Travel\Travel\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
