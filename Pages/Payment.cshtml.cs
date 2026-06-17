@@ -24,9 +24,10 @@ namespace Travel.Pages
         
         public int flightId { get; set; }
 
-        
+        public int backid;
         public async Task<IActionResult> OnGet(int id)
         {
+            backid = id;
             var userId = HttpContext.Session.GetInt32("UserId");
 
             if (userId == null)

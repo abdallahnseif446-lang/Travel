@@ -74,6 +74,23 @@
         color: #198754;
     }
 
+    .btn-home {
+        background: #0d6efd;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 12px 28px;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 25px;
+        font-weight: bold;
+        transition: .3s;
+    }
+
+        .btn-home:hover {
+            background: #084298;
+            color: white;
+        }
     /* 📱 Mobile */
     @@media (max-width: 768px) {
 
@@ -98,6 +115,10 @@
 
         .price {
             font-size: 24px;
+        }
+
+        .btn-home {
+            width: 100%;
         }
     }
 
@@ -160,7 +181,7 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                            <input class="form-control" required asp-for="passnum"
+                            <input type="text" class="form-control" required asp-for="passnum"
                                placeholder="Passport Number">
                     </div>
 
@@ -282,6 +303,11 @@
         
 
     </div>
+        <a href="/Index/1" class="btn-home">
+            Back To Home
+        </a>
+        
+
     
 
 </div>
